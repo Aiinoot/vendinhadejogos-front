@@ -1,0 +1,38 @@
+<div class="box">
+  <p>Cadastro de Jogo</p>
+  <form class="form-box" [formGroup]="form" (ngSubmit)="cadastrar()">
+    <input
+      formControlName="nome"
+      placeholder="Nome"
+      type="text"
+      maxlength="64"
+    />
+    <input formControlName="valor" placeholder="Preço" type="number" />
+    <input
+      formControlName="empresa"
+      placeholder="Empresa"
+      type="text"
+      maxlength="64"
+    />
+
+    <button type="submit">Cadastrar</button>
+    <button type="reset">Limpar</button>
+  </form>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Preço</th>
+      <th>Empresa</th>
+    </tr>
+    <tr *ngFor="let jogo of list">
+      <td>{{ jogo.id }}</td>
+      <td>{{ jogo.nome }}</td>
+      <td>
+        R$:
+        {{ jogo.valor }}
+      </td>
+      <td>{{ jogo.empresa }}</td>
+    </tr>
+  </table>
+</div>
