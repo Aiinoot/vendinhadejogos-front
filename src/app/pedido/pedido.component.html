@@ -1,0 +1,56 @@
+<div class="box">
+  <p>Pedidos</p>
+  <form class="form-box" [formGroup]="form" (ngSubmit)="cadastrar()">
+    <select formControlName="idCliente">
+      <option value="">Selecione um Cliente</option>
+      <option *ngFor="let item of clientes" value="{{ item.id }}">
+        {{ item.nome }}
+      </option>
+    </select>
+    <button type="submit" [disabled]="!form.valid">Cadastrar</button>
+  </form>
+  <hr />
+
+  <table class="tabelinha">
+    <tr>
+      <th>Cliente</th>
+      <th>Status</th>
+      <th>Data</th>
+      <th>Pagamento</th>
+      <th>Pago</th>
+      <th>Troco</th>
+      <th>Valor</th>
+      <th>Ações</th>
+    </tr>
+    <tr *ngFor="let item of pedidos">
+      <td>{{ item.cliente.nome }}</td>
+      <td>{{ item.status }}</td>
+      <td>{{ item.data | date: "dd/MM/yyyy" }}</td>
+      <td>{{ item.dataPagamento | date: "dd/MM/yyyy" }}</td>
+      <td>{{ item.valorTotal | currency: "USD" }}</td>
+      <td>{{ item.troco | currency: "USD" }}</td>
+      <td>{{ item.valor | currency: "USD" }}</td>
+      <td>
+        <button *ngIf="item.status === 'PENDENTE'" (click)="clickAddJogo(item)">
+          Add Jogo
+        </button>
+        <button *ngIf="item.status === 'PENDENTE'">Pagar</button>
+        <button>Detalhes</button>
+      </td>
+    </tr>
+  </table>
+
+  <div class="modal" *ngIf="formAddJogo.controls['idPedido'].value">
+    <form class="form-box" [formGroup]="formAddJogo" (ngSubmit)="addJogo()">
+      <p class="fechar" (click)="resetForm()">X</p>
+      <select formControlName="idJogo">
+        <option value="">Selecione um Jogo</option>
+        <option *ngFor="let item of jogos" value="{{ item.id }}">
+          {{ item.nome }}
+        </option>
+      </select>
+      <button type="submit" [disabled]="!formAddJogo.valid">Adicionar</button>
+    </form>
+    <div class="fundo"></div>
+  </div>
+</div>

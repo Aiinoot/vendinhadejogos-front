@@ -1,3 +1,4 @@
+import { PedidoModule } from './pedido/pedido.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -19,6 +20,7 @@ import { JogoModule } from './jogo/jogo.module';
     MenuModule,
     ClienteModule,
     JogoModule,
+    PedidoModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

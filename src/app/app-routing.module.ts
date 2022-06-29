@@ -1,3 +1,4 @@
+import { PedidoComponent } from './pedido/pedido.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClienteComponent } from './cliente/cliente.component';
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'sobre', component: SobreComponent },
   { path: 'cliente', component: ClienteComponent },
   { path: 'jogo', component: JogoComponent },
+  { path: 'pedido', component: PedidoComponent },
 ];
 
 @NgModule({
