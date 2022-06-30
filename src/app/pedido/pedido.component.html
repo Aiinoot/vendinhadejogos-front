@@ -35,8 +35,12 @@
         <button *ngIf="item.status === 'PENDENTE'" (click)="clickAddJogo(item)">
           Add Jogo
         </button>
-        <button *ngIf="item.status === 'PENDENTE'">Pagar</button>
-        <button>Detalhes</button>
+        <button
+          *ngIf="item.status === 'PENDENTE'"
+          (click)="clickPagarJogo(item)"
+        >
+          Pagar
+        </button>
       </td>
     </tr>
   </table>
@@ -55,7 +59,7 @@
     <div class="fundo"></div>
   </div>
   <div class="modal" *ngIf="formPagarJogo.controls['idPedido'].value">
-    <form class="form-box" [formGroup]="formPagarJogo" (ngSubmit)="pagar()">
+    <form class="form-box" [formGroup]="formPagarJogo" (ngSubmit)="pagarJogo()">
       <p class="fechar" (click)="resetForm()">X</p>
       <input formControlName="valor" placeholder="Pagamento" type="number" />
       <button type="submit" [disabled]="!formPagarJogo.valid">Adicionar</button>

@@ -34,8 +34,7 @@ export class PedidoComponent implements OnInit {
 
   formPagarJogo: FormGroup = this.formBuilder.group({
     idPedido: new FormControl('', [Validators.required]),
-    idJogo: new FormControl('', [Validators.required]),
-    valor: new FormControl('null', [Validators.required]),
+    valor: new FormControl(null, [Validators.required]),
   });
 
   constructor(
@@ -94,12 +93,15 @@ export class PedidoComponent implements OnInit {
       });
     }
   }
-  pagar(): void {
-    console.log(this.formAddJogo.valid);
-    if (this.formAddJogo.valid) {
+  clickPagarJogo(pedido: Pedido) {
+    this.formPagarJogo.controls['idPedido'].setValue(pedido.id);
+  }
+  pagarJogo(): void {
+    console.log(this.formPagarJogo.valid);
+    if (this.formPagarJogo.valid) {
       const idPedido = this.formAddJogo.controls['idPedido'].value;
-      const idJogo = this.formAddJogo.controls['idJogo'].value;
-      this.pedidoService.pagar(idPedido, idJogo).subscribe(() => {
+      const valor = this.formPagarJogo.controls['valor'].value;
+      this.pedidoService.pagar(idPedido, valor).subscribe(() => {
         this.consultarPedidos();
         this.resetForm();
       });
@@ -109,6 +111,9 @@ export class PedidoComponent implements OnInit {
   resetForm(): void {
     this.form.reset();
     this.form.controls['idCliente'].setValue('');
+
+    this.formPagarJogo.reset();
+    this.formPagarJogo.controls['valor'].setValue('');
 
     this.formAddJogo.reset();
     this.formAddJogo.controls['idJogo'].setValue('');
