@@ -30,6 +30,7 @@
       <td>{{ item.valorTotal | currency: "USD" }}</td>
       <td>{{ item.troco | currency: "USD" }}</td>
       <td>{{ item.valor | currency: "USD" }}</td>
+
       <td>
         <button *ngIf="item.status === 'PENDENTE'" (click)="clickAddJogo(item)">
           Add Jogo
@@ -50,6 +51,14 @@
         </option>
       </select>
       <button type="submit" [disabled]="!formAddJogo.valid">Adicionar</button>
+    </form>
+    <div class="fundo"></div>
+  </div>
+  <div class="modal" *ngIf="formPagarJogo.controls['idPedido'].value">
+    <form class="form-box" [formGroup]="formPagarJogo" (ngSubmit)="pagar()">
+      <p class="fechar" (click)="resetForm()">X</p>
+      <input formControlName="valor" placeholder="Pagamento" type="number" />
+      <button type="submit" [disabled]="!formPagarJogo.valid">Adicionar</button>
     </form>
     <div class="fundo"></div>
   </div>

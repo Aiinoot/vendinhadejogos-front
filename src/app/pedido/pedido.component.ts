@@ -32,6 +32,12 @@ export class PedidoComponent implements OnInit {
     idJogo: new FormControl('', [Validators.required]),
   });
 
+  formPagarJogo: FormGroup = this.formBuilder.group({
+    idPedido: new FormControl('', [Validators.required]),
+    idJogo: new FormControl('', [Validators.required]),
+    valor: new FormControl('null', [Validators.required]),
+  });
+
   constructor(
     private formBuilder: FormBuilder,
     private pedidoService: PedidoService,
@@ -78,10 +84,22 @@ export class PedidoComponent implements OnInit {
   }
 
   addJogo(): void {
+    console.log(this.formAddJogo.valid);
     if (this.formAddJogo.valid) {
       const idPedido = this.formAddJogo.controls['idPedido'].value;
       const idJogo = this.formAddJogo.controls['idJogo'].value;
       this.pedidoService.adicionarJogo(idPedido, idJogo).subscribe(() => {
+        this.consultarPedidos();
+        this.resetForm();
+      });
+    }
+  }
+  pagar(): void {
+    console.log(this.formAddJogo.valid);
+    if (this.formAddJogo.valid) {
+      const idPedido = this.formAddJogo.controls['idPedido'].value;
+      const idJogo = this.formAddJogo.controls['idJogo'].value;
+      this.pedidoService.pagar(idPedido, idJogo).subscribe(() => {
         this.consultarPedidos();
         this.resetForm();
       });

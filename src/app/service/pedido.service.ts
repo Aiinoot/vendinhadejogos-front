@@ -23,7 +23,8 @@ export class PedidoService {
 
   adicionarJogo(id: string, idJogo: string): Observable<Pedido> {
     return this.http.put<Pedido>(this.url + 'adicionar-jogo/' + id, {
-      idsJogos: [idJogo],
+      idJogo: idJogo,
+      qtd: 1,
     });
   }
 
