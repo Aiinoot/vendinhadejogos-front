@@ -23,14 +23,13 @@
     <button type="reset">Limpar</button>
   </form>
   <hr />
+  <h2>Clientes Cadastrados</h2>
   <table>
     <tr>
-      <th>ID</th>
       <th>Nome</th>
       <th>Data de Nascimento</th>
     </tr>
     <tr *ngFor="let cliente of list">
-      <td>{{ cliente.id }}</td>
       <td>{{ cliente.nome }}</td>
       <td>{{ cliente.niver | date: "dd/MM/yyyy" }}</td>
     </tr>
